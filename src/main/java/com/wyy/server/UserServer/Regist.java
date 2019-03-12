@@ -31,11 +31,18 @@ public class Regist extends HttpServlet {
         response.setCharacterEncoding("utf-8");
 
         String username = request.getParameter("username");
-        String password = request.getParameter("pwd");
-        int i = userDaoImp.regiest(username,password);
-        PrintWriter out = response.getWriter();
+        String password = request.getParameter("pwd"); PrintWriter out = response.getWriter();
         JSONObject jsonObject = new JSONObject();
-        jsonObject.put("result",i);
+
+        int result = 1;
+        try {
+            result = userDaoImp.regiest(username,password);
+        }
+        catch (Exception e){
+            jsonObject.put("result",0);
+            out.print(jsonObject);
+        }
+        jsonObject.put("result",result);
         out.print(jsonObject.toString());
     }
 

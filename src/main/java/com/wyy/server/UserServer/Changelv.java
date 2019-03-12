@@ -1,6 +1,7 @@
 package com.wyy.server.UserServer;
 
 import com.wyy.dao.UserDaoImp;
+import net.sf.json.JSONObject;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -31,9 +32,18 @@ public class Changelv extends HttpServlet {
         response.setCharacterEncoding("utf-8");
         String uid = request.getParameter("uid");
         String lv = request.getParameter("lv");
-        int i = userDaoImp.levelChange(Integer.parseInt(uid),Integer.parseInt(lv));
+        JSONObject jsonObject = new JSONObject();
         PrintWriter out = response.getWriter();
-        out.print(i);
+        try {
+            userDaoImp.levelChange(Integer.parseInt(uid),Integer.parseInt(lv));
+        }
+        catch (Exception e){
+            jsonObject.put("result",0);
+        } finally {
+            out.print(jsonObject);
+        }
+        jsonObject.put("result",1);
+        out.print(jsonObject);
     }
 
     @Override

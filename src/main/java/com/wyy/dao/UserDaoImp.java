@@ -116,14 +116,18 @@ public class UserDaoImp implements UserDao {
         Session session = sessionFactory.openSession();
         Transaction transaction = session.getTransaction();
         transaction.begin();
-        User user = session.load(User.class,uid);
-        int tid = user.getTid();
-        Team team = session.load(Team.class,tid);
-        System.out.println(user.getUsername());
-        System.out.println(team.getTname());
-        team.getPlayers().remove(user);
-        user.setTeam(null);
-        user.setTid(13);
+        try {
+            User user = session.load(User.class, uid);
+            int tid = user.getTid();
+            Team team = session.load(Team.class, tid);
+            System.out.println(user.getUsername());
+            System.out.println(team.getTname());
+            team.getPlayers().remove(user);
+            user.setTeam(team);
+            user.setTid(13);
+        } catch (Exception e){
+            transaction.rollback();
+        }
         transaction.commit();
         session.close();
     }
@@ -186,6 +190,6 @@ public class UserDaoImp implements UserDao {
 
     @Test
     public void Test(){
-
+        exitTeam(31);
     }
 }

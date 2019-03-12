@@ -7,7 +7,7 @@ import com.wyy.po.Field;
  */
 public interface FieldDao {
     Field queryField(String name);
-    void addnew(String name);
+    int addnew(String name);
     void del(String name);
     void update(String name);
 }

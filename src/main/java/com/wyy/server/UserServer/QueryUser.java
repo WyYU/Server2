@@ -39,12 +39,14 @@ public class QueryUser extends HttpServlet {
             user = userDaoImp.queryName(value);
         }
         if (user == null){
-           out.print(0);
+            jsonObject.put("result",0);
+           out.print(jsonObject);
             return ;
         }
-        jsonObject.put("username",user.getUsername().trim());
+        jsonObject.put("result",1);
+        jsonObject.put("username",user.getUsername());
         jsonObject.put("id",user.getId());
-        jsonObject.put("pos",user.getPosition().trim());
+        jsonObject.put("pos",user.getPosition());
         jsonObject.put("team",user.getTid());
         out.print(jsonObject.toString());
     }

@@ -41,6 +41,26 @@
         <servlet-name>Changelv</servlet-name>
         <servlet-class>com.wyy.server.UserServer.Changelv</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>QueryTeam</servlet-name>
+        <servlet-class>com.wyy.server.TeamServer.QueryTeam</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>QueryTeamPalyer</servlet-name>
+        <servlet-class>com.wyy.server.TeamServer.QueryTeamplayer</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>Delteam</servlet-name>
+        <servlet-class>com.wyy.server.TeamServer.Delteam</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ExitTeam</servlet-name>
+        <servlet-class>com.wyy.server.UserServer.ExitTeam</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>JoinTeam</servlet-name>
+        <servlet-class>com.wyy.server.UserServer.JoinTeam</servlet-class>
+    </servlet>
 
     <servlet-mapping>
         <servlet-name>HelloWorld</servlet-name>
@@ -77,6 +97,26 @@
     <servlet-mapping>
         <servlet-name>Changelv</servlet-name>
         <url-pattern>/changelv</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>QueryTeam</servlet-name>
+        <url-pattern>/queryteam</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>QueryTeamPalyer</servlet-name>
+        <url-pattern>/queryteamplayer</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Delteam</servlet-name>
+        <url-pattern>/delteam</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ExitTeam</servlet-name>
+        <url-pattern>/exitteam</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>JoinTeam</servlet-name>
+        <url-pattern>/jointeam</url-pattern>
     </servlet-mapping>
 
 </web-app>

@@ -1,6 +1,6 @@
-package com.wyy.server.TeamServer;
+package com.wyy.server.UserServer;
 
-import com.wyy.dao.TeamDaoImp;
+import com.wyy.dao.UserDaoImp;
 import net.sf.json.JSONObject;
 
 import javax.servlet.ServletException;
@@ -13,43 +13,38 @@ import java.io.PrintWriter;
 /**
  * Created by dell on 2019/3/12 0012.
  */
-public class Createteam extends HttpServlet {
-    TeamDaoImp teamDaoImp ;
+public class ExitTeam extends HttpServlet {
+    UserDaoImp userDaoImp ;
 
     @Override
     public void init() throws ServletException {
-        teamDaoImp = new TeamDaoImp();
+        userDaoImp = new UserDaoImp();
         super.init();
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        doGet(request,response);
+        doPost(request,response);
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        response.setContentType("text/html;charset=utf-8");
-        response.setContentType("application/json");
-        response.setHeader("Pragma","No-cache");
-        response.setHeader("Cache-Control","no-cache");
+        String uid = request.getParameter("uid");
+        userDaoImp.deluser(Integer.parseInt(uid));
         PrintWriter out = response.getWriter();
         JSONObject jsonObject = new JSONObject();
-        String teamname = request.getParameter("tname");
-        String des = request.getParameter("des");
-        int restult;
         try {
-            restult = teamDaoImp.createTeam(teamname);
-        } catch (Exception e){
+            userDaoImp.exitTeam(Integer.parseInt(uid));
+        } catch (Exception e) {
             jsonObject.put("result",0);
-            return;
+        } finally {
+            out.print(jsonObject);
         }
-        jsonObject.put("result",restult);
-        out.print(jsonObject.toString());
+        jsonObject.put("result",1);
     }
 
     @Override
     public void destroy() {
-        if (teamDaoImp!=null){
-            teamDaoImp = null;
+        if(userDaoImp!= null){
+            userDaoImp = null;
         }
         super.destroy();
     }

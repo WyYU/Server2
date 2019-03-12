@@ -101,9 +101,19 @@ public class TeamDaoImp {
         }
         return team;
     }
+
+    public int createTeam(String tname) {
+        Session session = sessionFactory.openSession();
+        Team team = queryteambyName(tname);
+        if (team!=null) {
+            return 0;
+        }
+        add(tname);
+        return 1;
+    }
     @Test
     public void test(){
-
+        System.out.println(createTeam("DLS2"));
     }
 
     public Iterator<User> qeryTeam(int tid){

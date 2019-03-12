@@ -9,8 +9,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * Created by dell on 2019/3/11 0011.
@@ -32,7 +30,6 @@ public class Login extends HttpServlet {
         String username = req.getParameter("username").trim();
         String password = req.getParameter("pwd").trim();
         int result = userDaoImp.login(username,password);
-        Map<String, String> params = new HashMap<>();
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("result",result);
         out.write(jsonObject.toString());
