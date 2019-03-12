@@ -1,6 +1,7 @@
 package com.wyy.server;
 
 import com.wyy.dao.UserDaoImp;
+import net.sf.json.JSONObject;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -32,8 +33,15 @@ public class Login extends HttpServlet {
         String password = req.getParameter("pwd").trim();
         int result = userDaoImp.login(username,password);
         Map<String, String> params = new HashMap<>();
-
-        out.write("<h1>" +result+"</h1>");
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("result",result);
+        out.write(jsonObject.toString());
+    }
+    @Override
+    public void destroy() {
+        if (userDaoImp!=null){
+            userDaoImp = null;
+        }
     }
 
 }

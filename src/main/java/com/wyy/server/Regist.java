@@ -1,6 +1,7 @@
 package com.wyy.server;
 
 import com.wyy.dao.UserDaoImp;
+import net.sf.json.JSONObject;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -33,8 +34,9 @@ public class Regist extends HttpServlet {
         String password = request.getParameter("pwd");
         int i = userDaoImp.regiest(username,password);
         PrintWriter out = response.getWriter();
-        System.out.println(i);
-        out.print(i);
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("result",i);
+        out.print(jsonObject.toString());
     }
 
     @Override

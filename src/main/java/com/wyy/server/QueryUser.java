@@ -37,4 +37,10 @@ public class QueryUser extends HttpServlet {
         jsonObject.put("team",user.getTid());
         out.print(jsonObject.toString());
     }
+    @Override
+    public void destroy() {
+        if (userDaoImp!=null){
+            userDaoImp = null;
+        }
+    }
 }
