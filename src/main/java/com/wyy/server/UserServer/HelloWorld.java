@@ -1,4 +1,4 @@
-package com.wyy.server;
+package com.wyy.server.UserServer;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;

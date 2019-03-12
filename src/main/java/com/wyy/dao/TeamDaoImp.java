@@ -6,6 +6,7 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
+import org.hibernate.query.Query;
 import org.junit.Test;
 
 import java.sql.Date;
@@ -72,15 +73,44 @@ public class TeamDaoImp {
         transaction.commit();
         session.close();
     }
+
+    public Team queryteambyid(int tid){
+        Session s =sessionFactory.openSession();
+        Transaction transaction = s.getTransaction();
+        transaction.begin();
+        Team team = (Team) s.createQuery("FROM Team where tid = "+"tid").list().get(0);
+        transaction.commit();
+        s.close();
+        return team;
+    }
+
+    public Team queryteambyName(String name){
+        Session session= sessionFactory.openSession();
+        Transaction transaction = session.getTransaction();
+        transaction.begin();
+        Query<Team> query;
+        Team team;
+        try {
+            query = session.createQuery("FROM Team WHERE tname = '"+name+"'");
+            team =query.list().get(0);
+        } catch (Exception e){
+            transaction.rollback();
+            return null;
+        }finally {
+            session.close();
+        }
+        return team;
+    }
     @Test
     public void test(){
 
     }
-    @Test
+
     public Iterator<User> qeryTeam(int tid){
         Session s =sessionFactory.openSession();
-        Team team = s.load(Team.class,14);
+        Team team = s.load(Team.class,tid);
         Iterator<User> userIterator = team.getPlayers().iterator();
+        s.close();
         return userIterator;
     }
 

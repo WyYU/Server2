@@ -186,7 +186,6 @@ public class UserDaoImp implements UserDao {
 
     @Test
     public void Test(){
-        System.out.println(queryId(14).getGoal());
-        System.out.println(queryId(13).getGoal());
+
     }
 }

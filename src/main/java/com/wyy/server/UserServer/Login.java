@@ -1,7 +1,6 @@
-package com.wyy.server;
+package com.wyy.server.UserServer;
 
 import com.wyy.dao.UserDaoImp;
-import com.wyy.po.User;
 import net.sf.json.JSONObject;
 
 import javax.servlet.ServletException;
@@ -10,16 +9,18 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Created by dell on 2019/3/11 0011.
  */
-public class QueryUser extends HttpServlet {
+public class Login extends HttpServlet {
     UserDaoImp userDaoImp ;
-
     @Override
     public void init() throws ServletException {
         userDaoImp = new UserDaoImp();
+        super.init();
     }
 
     @Override
@@ -28,14 +29,13 @@ public class QueryUser extends HttpServlet {
         req.setCharacterEncoding("utf-8");
         resp.setCharacterEncoding("utf-8");
         PrintWriter out = resp.getWriter();
-        String id = req.getParameter("id");
-        User user = userDaoImp.queryId(Integer.parseInt(id) );
+        String username = req.getParameter("username").trim();
+        String password = req.getParameter("pwd").trim();
+        int result = userDaoImp.login(username,password);
+        Map<String, String> params = new HashMap<>();
         JSONObject jsonObject = new JSONObject();
-        jsonObject.put("username",user.getUsername());
-        jsonObject.put("id",user.getId());
-        jsonObject.put("pos",user.getPosition());
-        jsonObject.put("team",user.getTid());
-        out.print(jsonObject.toString());
+        jsonObject.put("result",result);
+        out.write(jsonObject.toString());
     }
     @Override
     public void destroy() {
@@ -43,4 +43,5 @@ public class QueryUser extends HttpServlet {
             userDaoImp = null;
         }
     }
+
 }

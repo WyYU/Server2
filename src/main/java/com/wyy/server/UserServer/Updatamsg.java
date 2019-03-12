@@ -1,4 +1,4 @@
-package com.wyy.server;
+package com.wyy.server.UserServer;
 
 import com.wyy.dao.UserDaoImp;
 import net.sf.json.JSONObject;
@@ -11,32 +11,33 @@ import java.io.IOException;
 import java.io.PrintWriter;
 
 /**
- * Created by dell on 2019/3/11 0011.
+ * Created by dell on 2019/3/12 0012.
  */
-public class Regist extends HttpServlet {
+public class Updatamsg extends HttpServlet {
     UserDaoImp userDaoImp;
 
     @Override
     public void init() throws ServletException {
         userDaoImp = new UserDaoImp();
+        super.init();
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-       super.doGet(request,response);
+        doGet(request,response);
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setContentType("text/html;charset=utf-8");
         request.setCharacterEncoding("utf-8");
         response.setCharacterEncoding("utf-8");
-
-        String username = request.getParameter("username");
-        String password = request.getParameter("pwd");
-        int i = userDaoImp.regiest(username,password);
+        int uid = Integer.parseInt(request.getParameter("uid"));
+        int num = Integer.parseInt(request.getParameter("num"));
+        String pos = request.getParameter("pos");
+        int res = userDaoImp.updatameg(uid,num,pos);
+        JSONObject object = new JSONObject();
+        object.put("res",res);
         PrintWriter out = response.getWriter();
-        JSONObject jsonObject = new JSONObject();
-        jsonObject.put("result",i);
-        out.print(jsonObject.toString());
+        out.print(object);
     }
 
     @Override
@@ -44,5 +45,6 @@ public class Regist extends HttpServlet {
         if (userDaoImp!=null){
             userDaoImp = null;
         }
+        super.destroy();
     }
 }
