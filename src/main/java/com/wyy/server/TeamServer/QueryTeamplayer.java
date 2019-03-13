@@ -36,10 +36,20 @@ public class QueryTeamplayer extends HttpServlet {
         response.setHeader("Pragma","No-cache");
         response.setHeader("Cache-Control","no-cache");
         int id = Integer.parseInt(request.getParameter("tid"));
-        iterator = teamDaoImp.qeryTeam(id);
         JSONObject jsonObject = new JSONObject();
+        JSONObject result = new JSONObject();
         JSONArray jsonArray = new JSONArray();
-
+        JSONArray jsonArray1 = new JSONArray();
+        PrintWriter out = response.getWriter();
+        try {
+            iterator = teamDaoImp.qeryTeam(id);
+        } catch (Exception e) {
+            result.put("result",0);
+            jsonArray.add(jsonObject);
+            jsonArray1.add(result);
+            jsonArray1.add(jsonArray);
+            return;
+        }
         while (iterator.hasNext()){
             User user = iterator.next();
             jsonObject.put("username",user.getUsername());
@@ -51,8 +61,11 @@ public class QueryTeamplayer extends HttpServlet {
             jsonObject.put("lv",user.getLevel());
             jsonArray.add(jsonObject);
         }
-        PrintWriter out = response.getWriter();
-        out.print(jsonArray);
+        result.put("result",1);
+        jsonArray.add(jsonObject);
+        jsonArray1.add(result);
+        jsonArray1.add(jsonArray);
+        out.print(jsonArray1);
     }
 
     @Override

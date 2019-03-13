@@ -40,7 +40,11 @@ public class QueryUser extends HttpServlet {
         }
         if (user == null){
             jsonObject.put("result",0);
-           out.print(jsonObject);
+            jsonObject.put("username","null");
+            jsonObject.put("id","null");
+            jsonObject.put("pos","null");
+            jsonObject.put("team","null");
+            out.print(jsonObject);
             return ;
         }
         jsonObject.put("result",1);

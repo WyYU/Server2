@@ -23,13 +23,17 @@ public class FieldDaoImp implements FieldDao {
     @Override
     public Field queryField(String name) {
         Session session = sessionFactory.openSession();
-        Transaction transaction = session.getTransaction();
-        transaction.begin();
         List<Field> list = session.createQuery("FROM Field where name = '"+name+"'").list();
         if (list.size()>0){
             return list.get(0);
         }
         return  null;
+    }
+
+    public List<Field> queryall() {
+        Session session = sessionFactory.openSession();
+        List<Field> list = session.createQuery("FROM Field ").list();
+        return list;
     }
 
     @Override
@@ -65,6 +69,6 @@ public class FieldDaoImp implements FieldDao {
 
     @Test
     public void test(){
-        System.out.println(queryField("camp no5"));
+        System.out.println(queryall().get(0).getName());
     }
 }

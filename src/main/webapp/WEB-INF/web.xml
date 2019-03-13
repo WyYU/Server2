@@ -61,6 +61,10 @@
         <servlet-name>JoinTeam</servlet-name>
         <servlet-class>com.wyy.server.UserServer.JoinTeam</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>QueryField</servlet-name>
+        <servlet-class>com.wyy.server.FieldSever.QueryField</servlet-class>
+    </servlet>
 
     <servlet-mapping>
         <servlet-name>HelloWorld</servlet-name>
@@ -117,6 +121,10 @@
     <servlet-mapping>
         <servlet-name>JoinTeam</servlet-name>
         <url-pattern>/jointeam</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>QueryField</servlet-name>
+        <url-pattern>/queryfield</url-pattern>
     </servlet-mapping>
 
 </web-app>

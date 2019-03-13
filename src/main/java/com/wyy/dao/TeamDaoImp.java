@@ -113,7 +113,7 @@ public class TeamDaoImp {
     }
     @Test
     public void test(){
-        System.out.println(createTeam("DLS2"));
+        System.out.println(createTeam("DLS4"));
     }
 
     public Iterator<User> qeryTeam(int tid){

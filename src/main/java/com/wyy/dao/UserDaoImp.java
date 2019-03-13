@@ -30,7 +30,7 @@ public class UserDaoImp implements UserDao {
             User user = new User();
             user.setUsername(name);
             user.setPassword(pwd);
-
+            user.setImagepatch("apple.png");
             session.save(user);
         }
         catch (Exception e){
@@ -190,6 +190,6 @@ public class UserDaoImp implements UserDao {
 
     @Test
     public void Test(){
-        exitTeam(31);
+        add("dasha","12312412");
     }
 }
