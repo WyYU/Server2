@@ -48,6 +48,7 @@ public class QueryTeamplayer extends HttpServlet {
             jsonArray.add(jsonObject);
             jsonArray1.add(result);
             jsonArray1.add(jsonArray);
+            out.print(jsonArray1);
             return;
         }
         while (iterator.hasNext()){
