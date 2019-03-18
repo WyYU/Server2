@@ -18,7 +18,7 @@ public class Regist extends HttpServlet {
 
     @Override
     public void init() throws ServletException {
-        userDaoImp = new UserDaoImp();
+        userDaoImp = UserDaoImp.getInstance();
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

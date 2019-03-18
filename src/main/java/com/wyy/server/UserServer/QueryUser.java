@@ -19,7 +19,7 @@ public class QueryUser extends HttpServlet {
 
     @Override
     public void init() throws ServletException {
-        userDaoImp = new UserDaoImp();
+        userDaoImp = UserDaoImp.getInstance();
     }
 
     @Override
@@ -44,6 +44,9 @@ public class QueryUser extends HttpServlet {
             jsonObject.put("id","null");
             jsonObject.put("pos","null");
             jsonObject.put("team","null");
+            jsonObject.put("num","null");
+            jsonObject.put("goal","null");
+            jsonObject.put("ass","null");
             out.print(jsonObject);
             return ;
         }
@@ -52,6 +55,11 @@ public class QueryUser extends HttpServlet {
         jsonObject.put("id",user.getId());
         jsonObject.put("pos",user.getPosition());
         jsonObject.put("team",user.getTid());
+        jsonObject.put("num",user.getNum());
+        jsonObject.put("imagepath",user.getImagepatch());
+        jsonObject.put("lv",user.getLevel());
+        jsonObject.put("goal",user.getGoal());
+        jsonObject.put("ass",user.getAssisting());
         out.print(jsonObject.toString());
     }
     @Override

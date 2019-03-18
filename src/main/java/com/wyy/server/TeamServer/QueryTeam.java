@@ -30,7 +30,6 @@ public class QueryTeam extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setContentType("text/html;charset=utf-8");
         response.setContentType("application/json");
-        response.setHeader("Cache-Control","no-cache");
         PrintWriter out = response.getWriter();
         JSONObject jsonObject = new JSONObject();
         String key = request.getParameter("key");
@@ -47,18 +46,17 @@ public class QueryTeam extends HttpServlet {
                 out.print(jsonObject);
                 return;
             }
+            out.print(team.getTname()+ jsonObject);
             jsonObject.put("teamname",team.getTname());
             jsonObject.put("tid",team.getTid());
-            jsonObject.put("createtime",team.getCreateTime());
+            jsonObject.put("createtime",team.getCreateTime().toString());
             jsonObject.put("introduce",team.getIntroduce());
             jsonObject.put("colorcode",team.getColorcode());
-            jsonObject.put("result",1);
+            out.print(jsonObject);
         } catch (Exception e){
             jsonObject.put("result",0);
             return;
         }
-        jsonObject.put("result",1);
-        out.print(jsonObject);
     }
 
     @Override

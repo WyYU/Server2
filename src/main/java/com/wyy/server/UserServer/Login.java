@@ -17,7 +17,7 @@ public class Login extends HttpServlet {
     UserDaoImp userDaoImp ;
     @Override
     public void init() throws ServletException {
-        userDaoImp = new UserDaoImp();
+        userDaoImp = UserDaoImp.getInstance();
         super.init();
     }
 

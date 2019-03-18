@@ -15,9 +15,16 @@ import java.util.List;
  * Created by dell on 2019/3/9 0009.
  */
 public class UserDaoImp implements UserDao {
+    private static UserDaoImp userDaoImp;
+    public static synchronized UserDaoImp getInstance(){
+        if(userDaoImp==null){
+            userDaoImp = new UserDaoImp();
+        }
+        return userDaoImp;
+    }
     private org.hibernate.cfg.Configuration cfg;
     private SessionFactory sessionFactory;
-    public  UserDaoImp(){
+    private  UserDaoImp(){
         cfg = new Configuration().configure("hibernate.cfg.xml");
         sessionFactory =cfg.buildSessionFactory();
     }
@@ -31,6 +38,7 @@ public class UserDaoImp implements UserDao {
             user.setUsername(name);
             user.setPassword(pwd);
             user.setImagepatch("apple.png");
+            user.setLevel(1);
             session.save(user);
         }
         catch (Exception e){

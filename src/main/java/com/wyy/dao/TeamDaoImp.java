@@ -74,11 +74,17 @@ public class TeamDaoImp {
         session.close();
     }
 
-    public Team queryteambyid(int tid){
+    public Team queryteambyid(int id){
         Session s =sessionFactory.openSession();
         Transaction transaction = s.getTransaction();
         transaction.begin();
-        Team team = (Team) s.createQuery("FROM Team where tid = "+"tid").list().get(0);
+        Query<Team> query;
+        Team team;
+        query = s.createQuery("FROM Team WHERE tid = "+id+"");
+        if (query.list().size()<1){
+            return null;
+        }
+        team = query.list().get(0);
         transaction.commit();
         s.close();
         return team;
@@ -113,7 +119,7 @@ public class TeamDaoImp {
     }
     @Test
     public void test(){
-        System.out.println(createTeam("DLS4"));
+        System.out.println(queryteambyid(22));
     }
 
     public Iterator<User> qeryTeam(int tid){
