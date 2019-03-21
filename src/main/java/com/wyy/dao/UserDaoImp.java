@@ -39,6 +39,12 @@ public class UserDaoImp implements UserDao {
             user.setPassword(pwd);
             user.setImagepatch("apple.png");
             user.setLevel(1);
+            user.setTid(26);
+            user.setAssisting(0);
+            user.setGoal(0);
+            user.setPosition("null");
+            user.setBalance(0.00);
+            user.setNum(0);
             session.save(user);
         }
         catch (Exception e){

@@ -46,12 +46,13 @@ public class QueryTeam extends HttpServlet {
                 out.print(jsonObject);
                 return;
             }
-            out.print(team.getTname()+ jsonObject);
+            jsonObject.put("result",1);
             jsonObject.put("teamname",team.getTname());
             jsonObject.put("tid",team.getTid());
             jsonObject.put("createtime",team.getCreateTime().toString());
             jsonObject.put("introduce",team.getIntroduce());
             jsonObject.put("colorcode",team.getColorcode());
+            jsonObject.put("imagepath",team.getIconpath());
             out.print(jsonObject);
         } catch (Exception e){
             jsonObject.put("result",0);

@@ -53,17 +53,25 @@ public class QueryTeamplayer extends HttpServlet {
         }
         while (iterator.hasNext()){
             User user = iterator.next();
+//            jsonObject.put("username",user.getUsername());
+//            jsonObject.put("uid",user.getId());
+//            jsonObject.put("pos",user.getPosition());
+//            jsonObject.put("num",user.getNum());
+//            jsonObject.put("goal",user.getGoal());
+//            jsonObject.put("ass",user.getAssisting());
+//            jsonObject.put("lv",user.getLevel());
             jsonObject.put("username",user.getUsername());
-            jsonObject.put("uid",user.getId());
+            jsonObject.put("id",user.getId());
             jsonObject.put("pos",user.getPosition());
+            jsonObject.put("team",user.getTid());
             jsonObject.put("num",user.getNum());
+            jsonObject.put("imagepath",user.getImagepatch());
+            jsonObject.put("lv",user.getLevel());
             jsonObject.put("goal",user.getGoal());
             jsonObject.put("ass",user.getAssisting());
-            jsonObject.put("lv",user.getLevel());
             jsonArray.add(jsonObject);
         }
         result.put("result",1);
-        jsonArray.add(jsonObject);
         jsonArray1.add(result);
         jsonArray1.add(jsonArray);
         out.print(jsonArray1);
