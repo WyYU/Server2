@@ -4,6 +4,7 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.sql.Date;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -18,6 +19,7 @@ public class Team implements Serializable{
     private String colorcode;
     private String introduce;
     private Set<User> players = new HashSet<>();
+    private List<Notification> notifiction;
 
     @Id
     @Column(name = "TID", nullable = false)
@@ -116,4 +118,12 @@ public class Team implements Serializable{
         this.players = players;
     }
 
+    @OneToMany(mappedBy = "team")
+    public List<Notification> getNotifiction() {
+        return notifiction;
+    }
+
+    public void setNotifiction(List<Notification> notifiction) {
+        this.notifiction = notifiction;
+    }
 }

@@ -24,7 +24,7 @@ public class UserDaoImp implements UserDao {
     }
     private org.hibernate.cfg.Configuration cfg;
     private SessionFactory sessionFactory;
-    private  UserDaoImp(){
+    public  UserDaoImp(){
         cfg = new Configuration().configure("hibernate.cfg.xml");
         sessionFactory =cfg.buildSessionFactory();
     }
@@ -204,6 +204,6 @@ public class UserDaoImp implements UserDao {
 
     @Test
     public void Test(){
-        add("dasha","12312412");
+        queryId(34);
     }
 }

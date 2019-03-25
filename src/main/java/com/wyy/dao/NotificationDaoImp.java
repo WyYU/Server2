@@ -5,9 +5,11 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
+import org.hibernate.query.Query;
 import org.junit.Test;
 
 import java.sql.Date;
+import java.util.List;
 
 /**
  * Created by dell on 2019/3/24 0024.
@@ -39,8 +41,26 @@ public class NotificationDaoImp implements NotificationDao {
         session.close();
     }
 
+    @Override
+    public void del() {
+
+    }
+
+    @Override
+    public List<Notification> queryNoti(int tid) {
+        List<Notification> list = null;
+        Session session = sessionFactory.openSession();
+        Transaction transaction = session.getTransaction();
+        transaction.begin();
+        Query<Notification> query;
+        query = session.createQuery("from Notification where tid = "+tid+"");
+        list = query.list();
+        return list;
+    }
+
     @Test
     public void test(){
-        createNoti(14,"新通知");
+       // createNoti(24,"new");
+        System.out.println(queryNoti(14));
     }
 }
