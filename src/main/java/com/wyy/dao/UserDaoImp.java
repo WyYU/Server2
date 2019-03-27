@@ -105,6 +105,17 @@ public class UserDaoImp implements UserDao {
 
     }
 
+    public void updatahead(int uid ,String headpath){
+        Session session = sessionFactory.openSession();
+        Transaction transaction = session.getTransaction();
+        transaction.begin();
+        User user = session.load(User.class,uid);
+        user.setImagepatch(headpath);
+        session.save(user);
+        transaction.commit();
+        session.close();
+    }
+
     @Override
     public void joinTeam(int uid, int tid) {
         Session session = sessionFactory.openSession();
@@ -204,6 +215,6 @@ public class UserDaoImp implements UserDao {
 
     @Test
     public void Test(){
-        queryId(34);
+        updatahead(16,"banana.png");
     }
 }

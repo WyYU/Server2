@@ -65,6 +65,18 @@
         <servlet-name>QueryField</servlet-name>
         <servlet-class>com.wyy.server.FieldSever.QueryField</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>QueryteamNoti</servlet-name>
+        <servlet-class>com.wyy.server.NotificationSever.QueryteamNoti</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>CreatenewNoti</servlet-name>
+        <servlet-class>com.wyy.server.NotificationSever.CreatenewNoti</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>Updatahead</servlet-name>
+        <servlet-class>com.wyy.server.UserServer.Updatahead</servlet-class>
+    </servlet>
 
     <servlet-mapping>
         <servlet-name>HelloWorld</servlet-name>
@@ -125,6 +137,18 @@
     <servlet-mapping>
         <servlet-name>QueryField</servlet-name>
         <url-pattern>/queryfield</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>QueryteamNoti</servlet-name>
+        <url-pattern>/queryteamnoti</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CreatenewNoti</servlet-name>
+        <url-pattern>/createnewnoti</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Updatahead</servlet-name>
+        <url-pattern>/updatahead</url-pattern>
     </servlet-mapping>
 
 </web-app>
