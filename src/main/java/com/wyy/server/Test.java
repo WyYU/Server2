@@ -1,5 +1,7 @@
 package com.wyy.server;
 
+import com.wyy.dao.UserDaoImp;
+
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -15,10 +17,11 @@ public class Test extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setContentType("text/html;charset=utf-8");
         req.setCharacterEncoding("utf-8");
-        resp.setCharacterEncoding("utf-8");
+        UserDaoImp userDaoImp = UserDaoImp.getInstance();
         PrintWriter out = resp.getWriter();
-        String username = req.getParameter("username").trim();
-        out.write("<h1>" +username+ "</h1>");
+        String uid = req.getParameter("uid").trim();
+        userDaoImp.updatahead(Integer.parseInt(uid),"headpic/head_54.jpg");
+        out.write("succ");
     }
 
     @Override
