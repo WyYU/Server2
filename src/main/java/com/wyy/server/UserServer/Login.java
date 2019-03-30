@@ -29,6 +29,7 @@ public class Login extends HttpServlet {
         PrintWriter out = resp.getWriter();
         String username = req.getParameter("username").trim();
         String password = req.getParameter("pwd").trim();
+        System.out.println("userlogin  user "+username+ "pwd"+password);
         int result = userDaoImp.login(username,password);
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("result",result);

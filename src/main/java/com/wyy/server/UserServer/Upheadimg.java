@@ -71,7 +71,7 @@ public class Upheadimg extends HttpServlet {
             o.print(content);
         }
 
-        System.out.println("head_"+uid.toString()+".jpg");
+        System.out.println("upheadimg:"+filename+"/head_"+uid.toString()+".jpg");
         userDaoImp.updatahead(Integer.parseInt(uid),filename+"/head_"+uid+".jpg");
         o.print("{'code':'1', 'msg':'success'}");
     }
