@@ -17,7 +17,11 @@ public class Login extends HttpServlet {
     UserDaoImp userDaoImp ;
     @Override
     public void init() throws ServletException {
-        userDaoImp = UserDaoImp.getInstance();
+        try {
+            userDaoImp = UserDaoImp.getInstance();
+        } catch (Exception e) {
+            System.out.println("Connection to Database Field");
+        }
         super.init();
     }
 

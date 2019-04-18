@@ -58,19 +58,20 @@ public class Upheadimg extends HttpServlet {
             o.print(content);
             e.printStackTrace();
         }
-        String path = request.getRealPath("/"+filename+ "/");
-        File file = new File(path);
+        //String path = request.getSession().getServletContext().getRealPath("/"+filename+"/");
+        String path2=System.getProperty("catalina.home")+"\\webapps\\ROOT\\"+filename;
+        File file = new File(path2);
         if (!file.exists()) {
             file.mkdir();
         }
-        File pic = new File(path,"head_"+uid.toString()+".jpg");
+        File pic = new File(path2,"head_"+uid.toString()+".jpg");
         try {
             fileItems.get(0).write(pic);
         } catch (Exception e){
             content =  "{'code':'0', 'msg':'上传服务器失败'}";
             o.print(content);
         }
-
+        System.out.println("path2 "+path2);
         System.out.println("upheadimg:"+filename+"/head_"+uid.toString()+".jpg");
         userDaoImp.updatahead(Integer.parseInt(uid),filename+"/head_"+uid+".jpg");
         o.print("{'code':'1', 'msg':'success'}");
