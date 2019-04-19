@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -30,6 +31,10 @@ public class Upheadimg extends HttpServlet {
         super.init();
     }
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        doGet(request,response);
+    }
+
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setCharacterEncoding("utf-8");
         PrintWriter o = response.getWriter();
         String uid = request.getParameter("uid");
@@ -40,8 +45,7 @@ public class Upheadimg extends HttpServlet {
         sfu.setFileSizeMax(10*1024*1024);
         String str = request.getServletContext().getRealPath("/");
         String content ;
-        int loc = str.indexOf("target");
-        Map<String,String> map = new HashMap<>();
+        Map<String,String> map ;
         List<FileItem> fileItems = null;
         try {
             fileItems = sfu.parseRequest(new ServletRequestContext(request));
@@ -59,12 +63,28 @@ public class Upheadimg extends HttpServlet {
             e.printStackTrace();
         }
         //String path = request.getSession().getServletContext().getRealPath("/"+filename+"/");
+        String rootpath = System.getProperty("catalina.home")+"\\webapps\\ROOT";
+        File root = new File(rootpath);
+        if (!root.exists()){
+            root.mkdir();
+        }
         String path2=System.getProperty("catalina.home")+"\\webapps\\ROOT\\"+filename;
         File file = new File(path2);
         if (!file.exists()) {
             file.mkdir();
         }
-        File pic = new File(path2,"head_"+uid.toString()+".jpg");
+        String oldpath = userDaoImp.queryId(Integer.parseInt(uid)).getImagepatch().split("/")[1];
+        System.out.println(oldpath);
+        File oldfile =new File(path2,oldpath);
+        if (oldfile.exists()){
+            oldfile.delete();
+            System.out.println("deloldfile "+oldpath);
+        }
+
+        Date date = new Date();
+        String timestrap = String.valueOf(date.getTime());
+        String picName = "head_"+uid.toString()+timestrap+".jpg";
+        File pic = new File(path2,picName);
         try {
             fileItems.get(0).write(pic);
         } catch (Exception e){
@@ -72,12 +92,9 @@ public class Upheadimg extends HttpServlet {
             o.print(content);
         }
         System.out.println("path2 "+path2);
-        System.out.println("upheadimg:"+filename+"/head_"+uid.toString()+".jpg");
-        userDaoImp.updatahead(Integer.parseInt(uid),filename+"/head_"+uid+".jpg");
+        System.out.println("upheadimg:"+picName+".jpg");
+        userDaoImp.updatahead(Integer.parseInt(uid),filename+"/"+picName);
         o.print("{'code':'1', 'msg':'success'}");
     }
 
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        super.doGet(request,response);
-    }
 }
