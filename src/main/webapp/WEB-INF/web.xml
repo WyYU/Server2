@@ -75,7 +75,7 @@
     </servlet>
     <servlet>
         <servlet-name>Updatahead</servlet-name>
-        <servlet-class>com.wyy.server.UserServer.Updatahead</servlet-class>
+        <servlet-class>com.wyy.server.UserServer.Upheadimg</servlet-class>
     </servlet>
 
     <servlet-mapping>

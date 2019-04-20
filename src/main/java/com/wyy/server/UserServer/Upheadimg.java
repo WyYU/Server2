@@ -64,6 +64,7 @@ public class Upheadimg extends HttpServlet {
         }
         //String path = request.getSession().getServletContext().getRealPath("/"+filename+"/");
         String rootpath = System.getProperty("catalina.home")+"\\webapps\\ROOT";
+        System.out.println(rootpath);
         File root = new File(rootpath);
         if (!root.exists()){
             root.mkdir();
@@ -74,7 +75,8 @@ public class Upheadimg extends HttpServlet {
             file.mkdir();
         }
         String oldpath = userDaoImp.queryId(Integer.parseInt(uid)).getImagepatch().split("/")[1];
-        System.out.println(oldpath);
+        System.out.println("oldpath  "+oldpath);
+
         File oldfile =new File(path2,oldpath);
         if (oldfile.exists()){
             oldfile.delete();
@@ -92,7 +94,7 @@ public class Upheadimg extends HttpServlet {
             o.print(content);
         }
         System.out.println("path2 "+path2);
-        System.out.println("upheadimg:"+picName+".jpg");
+        System.out.println("upheadimg:"+picName);
         userDaoImp.updatahead(Integer.parseInt(uid),filename+"/"+picName);
         o.print("{'code':'1', 'msg':'success'}");
     }

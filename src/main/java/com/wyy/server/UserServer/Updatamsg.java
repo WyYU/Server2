@@ -36,6 +36,7 @@ public class Updatamsg extends HttpServlet {
         int res = userDaoImp.updatameg(uid,num,pos);
         JSONObject object = new JSONObject();
         object.put("result",res);
+        System.out.println(res);
         PrintWriter out = response.getWriter();
         out.print(object);
     }
