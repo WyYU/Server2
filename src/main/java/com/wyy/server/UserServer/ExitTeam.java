@@ -1,5 +1,6 @@
 package com.wyy.server.UserServer;
 
+import com.wyy.dao.NotificationDaoImp;
 import com.wyy.dao.UserDaoImp;
 import net.sf.json.JSONObject;
 
@@ -15,10 +16,11 @@ import java.io.PrintWriter;
  */
 public class ExitTeam extends HttpServlet {
     UserDaoImp userDaoImp ;
-
+    NotificationDaoImp notificationDaoImp;
     @Override
     public void init() throws ServletException {
         userDaoImp = UserDaoImp.getInstance();
+        notificationDaoImp = NotificationDaoImp.getNotificationDaoImp();
         super.init();
     }
 

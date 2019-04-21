@@ -16,6 +16,7 @@ import java.util.List;
  */
 public class UserDaoImp implements UserDao {
     private static UserDaoImp userDaoImp;
+    NotificationDaoImp notificationDaoImp;
     public static synchronized UserDaoImp getInstance(){
         if(userDaoImp==null){
             userDaoImp = new UserDaoImp();
@@ -25,6 +26,7 @@ public class UserDaoImp implements UserDao {
     private org.hibernate.cfg.Configuration cfg;
     private SessionFactory sessionFactory;
     public  UserDaoImp(){
+        notificationDaoImp = NotificationDaoImp.getNotificationDaoImp();
         cfg = new Configuration().configure("hibernate.cfg.xml");
         sessionFactory =cfg.buildSessionFactory();
     }
@@ -123,10 +125,11 @@ public class UserDaoImp implements UserDao {
         transaction.begin();
         User user = session.load(User.class,uid);
         Team team = session.load(Team.class,tid);
-
         System.out.println(user.getUsername());
         System.out.println(team.getTname());
-
+        System.out.println("队员移动");
+        notificationDaoImp =  new NotificationDaoImp();
+        notificationDaoImp.createNoti(user.getTid(),user.getUsername()+"退出"+user.getTeam().getTname());
         user.setTeam(team);
         user.setTid(tid);
         team.getPlayers().add(user);
@@ -215,6 +218,7 @@ public class UserDaoImp implements UserDao {
 
     @Test
     public void Test(){
-        updatahead(16,"banana.png");
+
+        joinTeam(34,26);
     }
 }

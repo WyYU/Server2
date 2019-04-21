@@ -77,6 +77,10 @@
         <servlet-name>Updatahead</servlet-name>
         <servlet-class>com.wyy.server.UserServer.Upheadimg</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>QueryteamNotiNum</servlet-name>
+        <servlet-class>com.wyy.server.NotificationSever.QueryteamNotiNum</servlet-class>
+    </servlet>
 
     <servlet-mapping>
         <servlet-name>HelloWorld</servlet-name>
@@ -149,6 +153,10 @@
     <servlet-mapping>
         <servlet-name>Updatahead</servlet-name>
         <url-pattern>/updatahead</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>QueryteamNotiNum</servlet-name>
+        <url-pattern>/qtnm</url-pattern>
     </servlet-mapping>
 
 </web-app>

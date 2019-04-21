@@ -18,7 +18,7 @@ public class CreatenewNoti extends HttpServlet {
 
     @Override
     public void init() throws ServletException {
-        notificationDaoImp = new NotificationDaoImp();
+        notificationDaoImp = NotificationDaoImp.getNotificationDaoImp();
         super.init();
     }
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

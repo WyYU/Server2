@@ -1,5 +1,6 @@
 package com.wyy.server.UserServer;
 
+import com.wyy.dao.NotificationDaoImp;
 import com.wyy.dao.UserDaoImp;
 
 import javax.servlet.ServletException;
@@ -14,10 +15,12 @@ import java.io.PrintWriter;
  */
 public class Deluser extends HttpServlet {
     UserDaoImp userDaoImp ;
+    NotificationDaoImp notation;
 
     @Override
     public void init() throws ServletException {
         userDaoImp = UserDaoImp.getInstance();
+        notation = NotificationDaoImp.getNotificationDaoImp();
         super.init();
     }
 
