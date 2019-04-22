@@ -39,6 +39,8 @@ public class QueryteamNoti extends HttpServlet {
             JSONObject jsonObject = new JSONObject();
             jsonObject.put("Data",list.get(i).getData().toString());
             jsonObject.put("Context",list.get(i).getContext());
+            jsonObject.put("nid",list.get(i).getId());
+            System.out.println(jsonObject);
             jsonArray.add(jsonObject);
         }
         out.print(jsonArray);

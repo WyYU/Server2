@@ -64,7 +64,7 @@ public class Upheadimg extends HttpServlet {
         }
         //String path = request.getSession().getServletContext().getRealPath("/"+filename+"/");
         String rootpath = System.getProperty("catalina.home")+"\\webapps\\ROOT";
-        System.out.println(rootpath);
+        System.out.println("rootpath "+rootpath);
         File root = new File(rootpath);
         if (!root.exists()){
             root.mkdir();

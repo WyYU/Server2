@@ -130,6 +130,7 @@ public class UserDaoImp implements UserDao {
         System.out.println("队员移动");
         notificationDaoImp =  new NotificationDaoImp();
         notificationDaoImp.createNoti(user.getTid(),user.getUsername()+"退出"+user.getTeam().getTname());
+        notificationDaoImp.createNoti(team.getTid(),user.getUsername()+"加入"+team.getTname());
         user.setTeam(team);
         user.setTid(tid);
         team.getPlayers().add(user);
