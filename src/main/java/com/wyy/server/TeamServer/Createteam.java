@@ -1,6 +1,7 @@
 package com.wyy.server.TeamServer;
 
 import com.wyy.dao.TeamDaoImp;
+import com.wyy.po.Team;
 import net.sf.json.JSONObject;
 
 import javax.servlet.ServletException;
@@ -34,10 +35,13 @@ public class Createteam extends HttpServlet {
         PrintWriter out = response.getWriter();
         JSONObject jsonObject = new JSONObject();
         String teamname = request.getParameter("tname");
-        String des = request.getParameter("des");
+        String des = request.getParameter("desc");
+        Team team = new Team();
         int restult;
         try {
             restult = teamDaoImp.createTeam(teamname);
+            team = teamDaoImp.queryteambyName(teamname);
+            teamDaoImp.updataTeam(team.getTid(),des);
         } catch (Exception e){
             jsonObject.put("result",0);
             return;
