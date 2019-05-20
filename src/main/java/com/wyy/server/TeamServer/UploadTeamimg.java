@@ -1,6 +1,6 @@
-package com.wyy.server.UserServer;
+package com.wyy.server.TeamServer;
 
-import com.wyy.dao.UserDaoImp;
+import com.wyy.dao.TeamDaoImp;
 import org.apache.tomcat.util.http.fileupload.FileItem;
 import org.apache.tomcat.util.http.fileupload.FileUploadException;
 import org.apache.tomcat.util.http.fileupload.disk.DiskFileItemFactory;
@@ -14,31 +14,25 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 /**
- * Created by dell on 2019/3/28 0028.
+ * Created by dell on 2019/5/20 0020.
  */
-public class Upheadimg extends HttpServlet {
-    UserDaoImp userDaoImp;
+public class UploadTeamimg extends HttpServlet {
 
-    @Override
-    public void init() throws ServletException {
-        userDaoImp = UserDaoImp.getInstance();
-        super.init();
-    }
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         doGet(request,response);
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        TeamDaoImp teamDaoImp = new TeamDaoImp();
         request.setCharacterEncoding("utf-8");
         PrintWriter o = response.getWriter();
-        String uid = request.getParameter("uid");
-        String filename = "headpic";
+        String tid = request.getParameter("tid");
+        String filename = "teampic";
         DiskFileItemFactory factory = new DiskFileItemFactory(10*1024*1024, new File("E://temp"));
         ServletFileUpload sfu = new ServletFileUpload(factory);
         //设置单个文件最大值为10*1024*1024
@@ -58,7 +52,7 @@ public class Upheadimg extends HttpServlet {
                 }
             }
         } catch (FileUploadException e) {
-            content =  "{'code':'0', 'msg':'图片格式错误，上传失败'}";
+            content =  "{'code':'0', 'msg':'格式错误，上传失败'}";
             o.print(content);
             e.printStackTrace();
         }
@@ -75,29 +69,18 @@ public class Upheadimg extends HttpServlet {
             file.mkdir();
         }
         System.out.println("path2"+path2);
-        String oldpath = userDaoImp.queryId(Integer.parseInt(uid)).getImagepatch().split("/")[1];
-        System.out.println("oldpath  "+oldpath);
 
-        File oldfile =new File(path2,oldpath);
-        if (oldfile.exists()){
-            oldfile.delete();
-            System.out.println("oldfile "+oldpath);
-        }
-
-        Date date = new Date();
-        String timestrap = String.valueOf(date.getTime());
-        String picName = "head_"+uid.toString()+timestrap+".jpg";
+        String picName = "teampic_"+tid+".jpg";
         File pic = new File(path2,picName);
         try {
             fileItems.get(0).write(pic);
         } catch (Exception e){
-            content =  "{'code':'0', 'msg':'上传服务器失败'}";
+            content =  "{'code':'0', 'msg':'field'}";
             o.print(content);
         }
-        System.out.println("path2 "+path2);
-        System.out.println("upheadimg:"+picName);
-        userDaoImp.updatahead(Integer.parseInt(uid),filename+"/"+picName);
+        System.out.println("upteamimg:"+picName);
+
+        teamDaoImp.updatateamimg(Integer.parseInt(tid),filename+"/"+picName);
         o.print("{'code':'1', 'msg':'success'}");
     }
-
 }

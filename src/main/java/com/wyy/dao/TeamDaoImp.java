@@ -69,6 +69,32 @@ public class TeamDaoImp {
         transaction.begin();
         Team team = session.load(Team.class,tid);
         team.setIntroduce(introduce);
+        //team.setColorcode(colorid);
+       // team.setIconpath(path);
+        session.update(team);
+        transaction.commit();
+        session.close();
+    }
+
+    public void updataTeam(int tid,String introduce,String code,String path){
+        Session session =sessionFactory.openSession();
+        Transaction transaction = session.getTransaction();
+        transaction.begin();
+        Team team = session.load(Team.class,tid);
+        team.setIntroduce(introduce);
+        team.setColorcode(code);
+        team.setIconpath(path);
+        session.update(team);
+        transaction.commit();
+        session.close();
+    }
+
+    public void updatateamimg(int tid,String path){
+        Session session =sessionFactory.openSession();
+        Transaction transaction = session.getTransaction();
+        transaction.begin();
+        Team team = session.load(Team.class,tid);
+        team.setIconpath(path);
         session.update(team);
         transaction.commit();
         session.close();
@@ -119,7 +145,7 @@ public class TeamDaoImp {
     }
     @Test
     public void test(){
-        System.out.println(queryteambyid(22));
+        System.out.println(createTeam("436436"));
     }
 
     public Iterator<User> qeryTeam(int tid){

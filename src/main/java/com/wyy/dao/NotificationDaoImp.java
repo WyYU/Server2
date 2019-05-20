@@ -61,7 +61,7 @@ public class NotificationDaoImp implements NotificationDao {
         Transaction transaction = session.getTransaction();
         transaction.begin();
         Query<Notification> query;
-        query = session.createQuery("from Notification where tid = "+tid +"order by data desc ");
+        query = session.createQuery("from Notification where tid = "+tid +"order by id desc ");
         list = query.list();
         transaction.commit();
         session.close();

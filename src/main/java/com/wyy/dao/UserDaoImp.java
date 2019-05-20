@@ -9,6 +9,8 @@ import org.hibernate.cfg.Configuration;
 import org.hibernate.query.Query;
 import org.junit.Test;
 
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -39,7 +41,7 @@ public class UserDaoImp implements UserDao {
             User user = new User();
             user.setUsername(name);
             user.setPassword(pwd);
-            user.setImagepatch("apple.png");
+            user.setImagepatch("headpic/apple.png");
             user.setLevel(1);
             user.setTid(26);
             user.setAssisting(0);
@@ -215,11 +217,26 @@ public class UserDaoImp implements UserDao {
         return 1;
     }
 
+    public List<User> searchUser(String uname){
+        Session session =sessionFactory.openSession();
+        Transaction transaction = session.getTransaction();
+        transaction.begin();
+        Iterator<User> i =session.createQuery("FROM User where username like '%"+uname+"%'").iterate();
+        List<User> users = new ArrayList<>();
+        while (i.hasNext()){
+            User u = i.next();
+            users.add(u);
+            System.out.println(u.getUsername());
+        }
+        transaction.commit();
+        session.close();
+        return users;
+    }
+
 
 
     @Test
     public void Test(){
-
-        joinTeam(34,26);
+        searchUser("w");
     }
 }

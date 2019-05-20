@@ -32,7 +32,7 @@ public class QueryteamNoti extends HttpServlet {
         response.setContentType("text/html;charset=utf-8");
         response.setContentType("application/json");
         String tid = request.getParameter("tid");
-        PrintWriter out = response.getWriter();;
+        PrintWriter out = response.getWriter();
         List<Notification> list = notificationDaoImp.queryNoti(Integer.parseInt(tid));
         JSONArray jsonArray = new JSONArray();
         for (int i = 0; i<list.size();i++){

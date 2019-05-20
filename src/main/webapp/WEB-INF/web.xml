@@ -38,6 +38,10 @@
         <servlet-class>com.wyy.server.UserServer.Updatamsg</servlet-class>
     </servlet>
     <servlet>
+        <servlet-name>CreatenewTeam</servlet-name>
+        <servlet-class>com.wyy.server.TeamServer.CreatenewTeam</servlet-class>
+    </servlet>
+    <servlet>
         <servlet-name>Changelv</servlet-name>
         <servlet-class>com.wyy.server.UserServer.Changelv</servlet-class>
     </servlet>
@@ -80,6 +84,15 @@
     <servlet>
         <servlet-name>QueryteamNotiNum</servlet-name>
         <servlet-class>com.wyy.server.NotificationSever.QueryteamNotiNum</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SearchUser</servlet-name>
+        <servlet-class>com.wyy.server.UserServer.SearchUser</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>UploadTeamimg</servlet-name>
+        <servlet-class>com.wyy.server.TeamServer.UploadTeamimg</servlet-class>
     </servlet>
 
     <servlet-mapping>
@@ -157,6 +170,18 @@
     <servlet-mapping>
         <servlet-name>QueryteamNotiNum</servlet-name>
         <url-pattern>/qtnm</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SearchUser</servlet-name>
+        <url-pattern>/searchuser</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CreatenewTeam</servlet-name>
+        <url-pattern>/createnteam</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UploadTeamimg</servlet-name>
+        <url-pattern>/updatateamhead</url-pattern>
     </servlet-mapping>
 
 </web-app>
