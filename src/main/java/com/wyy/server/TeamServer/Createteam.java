@@ -16,10 +16,12 @@ import java.io.PrintWriter;
  */
 public class Createteam extends HttpServlet {
     TeamDaoImp teamDaoImp ;
+   // UserDaoImp userDaoImp;
 
     @Override
     public void init() throws ServletException {
         teamDaoImp = new TeamDaoImp();
+       // userDaoImp = new UserDaoImp();
         super.init();
     }
 
@@ -34,6 +36,7 @@ public class Createteam extends HttpServlet {
         response.setHeader("Cache-Control","no-cache");
         PrintWriter out = response.getWriter();
         JSONObject jsonObject = new JSONObject();
+        String uid = request.getParameter("uid");
         String teamname = request.getParameter("tname");
         String des = request.getParameter("desc");
         Team team = new Team();
@@ -42,6 +45,8 @@ public class Createteam extends HttpServlet {
             restult = teamDaoImp.createTeam(teamname);
             team = teamDaoImp.queryteambyName(teamname);
             teamDaoImp.updataTeam(team.getTid(),des);
+            System.out.println("添加球队描述");
+            //userDaoImp.joinTeam(Integer.parseInt(uid),team.getTid());
         } catch (Exception e){
             jsonObject.put("result",0);
             return;
