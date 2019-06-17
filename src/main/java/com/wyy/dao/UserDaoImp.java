@@ -232,11 +232,29 @@ public class UserDaoImp implements UserDao {
         session.close();
         return users;
     }
+    public int Changemsg(String uid ,String ass ,String goal ,String lv){
+        Session session =sessionFactory.openSession();
+        Transaction transaction = session.getTransaction();
+        transaction.begin();
+        try {
+            User user = session.load(User.class,Integer.parseInt(uid));
+            user.setAssisting(Integer.valueOf(ass));
+            user.setGoal(Integer.parseInt(goal));
+            user.setLevel(Integer.parseInt(lv));
+            session.update(user);
+            transaction.commit();
+            session.close();
+        }catch (Exception e) {
+            return 0;
+        }
+        return 1;
+
+    }
 
 
 
     @Test
     public void Test(){
-        searchUser("w");
+        System.out.println(Changemsg("16","2","2","2"));
     }
 }

@@ -95,6 +95,11 @@
         <servlet-class>com.wyy.server.TeamServer.UploadTeamimg</servlet-class>
     </servlet>
 
+    <servlet>
+        <servlet-name>Changeusermsg</servlet-name>
+        <servlet-class>com.wyy.server.UserServer.Changeusermsg</servlet-class>
+    </servlet>
+
     <servlet-mapping>
         <servlet-name>HelloWorld</servlet-name>
         <url-pattern>/A</url-pattern>
@@ -183,5 +188,8 @@
         <servlet-name>UploadTeamimg</servlet-name>
         <url-pattern>/updatateamhead</url-pattern>
     </servlet-mapping>
-
+    <servlet-mapping>
+        <servlet-name>Changeusermsg</servlet-name>
+        <url-pattern>/cusermsg</url-pattern>
+    </servlet-mapping>
 </web-app>
